@@ -1,0 +1,11 @@
+#character-selection, #challenger-box {
+    display: -webkit-flex;
+    display: flex;
+}
+
+#luke, #obi, #darth, #jarjar, #luke-challenger, #obi-challenger, #darth-challenger, #jarjar-challenger {
+    width: 100px;
+    height: 150px;
+    border-style: solid;
+    border-width: 2px;
+}
