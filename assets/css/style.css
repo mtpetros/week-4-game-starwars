@@ -3,7 +3,7 @@
     display: flex;
 }
 
-#luke, #obi, #darth, #jarjar, #luke-challenger, #obi-challenger, #darth-challenger, #jarjar-challenger {
+#luke, #obi, #darth, #jarjar, #luke-challenger, #obi-challenger, #darth-challenger, #jarjar-challenger, #enemy {
     width: 100px;
     height: 150px;
     border-style: solid;
