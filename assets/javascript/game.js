@@ -28,21 +28,22 @@ $(document).ready(function() {
 
 //Character Selection
 $("#luke").on("click.charSelect", function() {
-  $(this).off("click.charSelect");
+  $(this).off("click.charSelect").addClass("fighter");
+  $(".fighter").append('<p id="fighter-hp"></p>');
   $("#obi").off("click.charSelect");
   $("#darth").off("click.charSelect");
   $("#jarjar").off("click.charSelect");
   fighter = luke;
 
-  $("#obi").css("background-color", "red").attr("id", "obi-challenger").addClass("alive");  
+  $("#obi").css("background-color", "red").attr("id", "obi-challenger");  
   obiDet = $("#obi-challenger").detach();    
   $("#challenger-box").append(obiDet);
 
-  $("#darth").css("background-color", "red").attr("id", "darth-challenger").addClass("alive");
+  $("#darth").css("background-color", "red").attr("id", "darth-challenger");
   darthDet = $("#darth-challenger").detach();
   $("#challenger-box").append(darthDet);
 
-  $("#jarjar").css("background-color", "red").attr("id", "jarjar-challenger").addClass("alive");
+  $("#jarjar").css("background-color", "red").attr("id", "jarjar-challenger");
   jarjarDet = $("#jarjar-challenger").detach();
   $("#challenger-box").append(jarjarDet);
  
@@ -51,7 +52,8 @@ $("#luke").on("click.charSelect", function() {
 });
 
 $("#obi").on("click.charSelect", function() {
-  $(this).off("click.charSelect");
+  $(this).off("click.charSelect").addClass("fighter");
+  $(".fighter").append('<p id="fighter-hp"></p>');
   $("#luke").off("click.charSelect");
   $("#darth").off("click.charSelect");
   $("#jarjar").off("click.charSelect");
@@ -72,7 +74,8 @@ $("#obi").on("click.charSelect", function() {
 });
 
 $("#darth").on("click.charSelect", function() {
-  $(this).off("click.charSelect");
+  $(this).off("click.charSelect").addClass("fighter");
+  $(".fighter").append('<p id="fighter-hp"></p>');
   $("#obi").off("click.charSelect");
   $("#luke").off("click.charSelect");
   $("#jarjar").off("click.charSelect");
@@ -94,7 +97,8 @@ $("#darth").on("click.charSelect", function() {
 });
 
 $("#jarjar").on("click.charSelect", function() {
-  $(this).off("click.charSelect");
+  $(this).off("click.charSelect").addClass("fighter");
+  $(".fighter").append('<p id="fighter-hp"></p>');
   $("#obi").off("click.charSelect");
   $("#darth").off("click.charSelect");
   $("#luke").off("click.charSelect");
@@ -120,45 +124,74 @@ $(document).on("click.challSelect", "#luke-challenger", function() {
   enemy = luke;
   enemyDet = $(this).addClass("enemy").detach();    
   $("#fighter-box").append(enemyDet);
- // $(document).off("click.challSelect");
+  $(document).off("click.challSelect");
 });
 
 $(document).on("click.challSelect", "#obi-challenger", function() {
   enemy = obi;
   enemyDet = $(this).addClass("enemy").detach();    
   $("#fighter-box").append(enemyDet);
- // $(document).off("click.challSelect");
+  $(document).off("click.challSelect");
 });
 
 $(document).on("click.challSelect", "#darth-challenger", function() {
   enemy = darth;
  enemyDet = $(this).addClass("enemy").detach();    
   $("#fighter-box").append(enemyDet);
-  //$(document).off("click.challSelect");
+  $(document).off("click.challSelect");
 });
 
 $(document).on("click.challSelect", "#jarjar-challenger", function() {
   enemy = jarJar;
  enemyDet = $(this).addClass("enemy").detach();    
   $("#fighter-box").append(enemyDet);
- // $(document).off("click.challSelect");
+  $(document).off("click.challSelect");
 });
 
 //The fight
-
+  //enable new challenger choice
 function resetOnWin() {
- // $(document).on("click.challSelect", ".alive");
   enemy = null;
+
+  $(document).on("click.challSelect", "#luke-challenger", function() {
+  enemy = luke;
+  enemyDet = $(this).addClass("enemy").detach();    
+  $("#fighter-box").append(enemyDet);
+  $(document).off("click.challSelect");
+});
+
+$(document).on("click.challSelect", "#obi-challenger", function() {
+  enemy = obi;
+  enemyDet = $(this).addClass("enemy").detach();    
+  $("#fighter-box").append(enemyDet);
+  $(document).off("click.challSelect");
+});
+
+$(document).on("click.challSelect", "#darth-challenger", function() {
+  enemy = darth;
+ enemyDet = $(this).addClass("enemy").detach();    
+  $("#fighter-box").append(enemyDet);
+  $(document).off("click.challSelect");
+});
+
+$(document).on("click.challSelect", "#jarjar-challenger", function() {
+  enemy = jarJar;
+ enemyDet = $(this).addClass("enemy").detach();    
+  $("#fighter-box").append(enemyDet);
+  $(document).off("click.challSelect");
+});  
 }
 
 $("#attack-button").on("click", function() {
   enemy.hp-=fighter.atkPwr;
   fighter.hp-=enemy.cAtkPwr;
-  fighter.atkPwr+=fighter.atkPwr;
+  fighter.atkPwr+=(.5 * (fighter.atkPwr));
+  $("#fighter-hp").html(fighter.hp);
+  $("#enemy-hp").html(enemy.hp);
   $(".enemy").effect( "bounce", "slow" );
   if (enemy.hp <= 0) {
     $(".enemy").removeAttr("id").addClass("defeated");
-    resetOnWin();
+    resetOnWin();  
   }
   console.log("enemy.hp " + enemy.hp);
   console.log("fighter.hp " + fighter.hp);
